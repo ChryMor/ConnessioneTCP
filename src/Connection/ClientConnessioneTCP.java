@@ -5,10 +5,10 @@
  */
 package Connection;
 
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.net.ConnectException;
+import java.io.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
 
 /**
  *
@@ -25,11 +25,25 @@ public class ClientConnessioneTCP {
         String serverAddress = "localhost";
         //porta del server in ascolto
         int port = 2000;
-
+        
+        DataOutputStream out;
+        DataInputStream stream;
+        String s;
         //apertura della connessione al server sulla porta specificata
         try{
             connection = new Socket(serverAddress, port);
             System.out.println("Connessione aperta");
+            
+			s="Dammi la data di oggi";
+			out = new DataOutputStream(connection.getOutputStream());
+            out.writeUTF(s);
+            out.flush();
+            out.close();
+            
+			stream=new DataInputStream(connection.getInputStream());
+			System.out.println(stream.readUTF());
+            //stream.close();
+					
         }
         catch(ConnectException e){
             System.err.println("Server non disponibile!");
@@ -43,12 +57,12 @@ public class ClientConnessioneTCP {
             e2.printStackTrace();
         }
 		
-		
         //chiusura della connnessione
         finally{
                 try {
             if (connection!=null)
                 {
+					
                     connection.close();
                     System.out.println("Connessione chiusa!");
                 }
