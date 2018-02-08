@@ -28,18 +28,18 @@ public class ClientConnessioneTCP {
         
         DataOutputStream out;
         DataInputStream stream;
-        String s;
         //apertura della connessione al server sulla porta specificata
         try{
             connection = new Socket(serverAddress, port);
             System.out.println("Connessione aperta");
             
-			s="Dammi la data di oggi";
 			out = new DataOutputStream(connection.getOutputStream());
-            out.writeUTF(s);
+            out.writeUTF("Dammi la data di oggi");
             out.flush();
-            out.close();
+            //out.close();
             
+			System.out.print("Il Server risponde: ");
+			
 			stream=new DataInputStream(connection.getInputStream());
 			System.out.println(stream.readUTF());
             //stream.close();

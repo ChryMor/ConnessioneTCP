@@ -43,11 +43,13 @@ public class ServerConnessioneTCP {
                 System.out.println("Socket server: " + connection.getLocalSocketAddress());
                 System.out.println("Socket client: " + connection.getRemoteSocketAddress());
                 
+				System.out.print("Il Client dice: ");
+				
 				stream=new DataInputStream(connection.getInputStream());
 				System.out.println(stream.readUTF());
-				stream.close();
+				//stream.close();
 				
-				dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+				dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				Date date = new Date();
                 out = new DataOutputStream(connection.getOutputStream());
 				dataoggi=dateFormat.format(date);
