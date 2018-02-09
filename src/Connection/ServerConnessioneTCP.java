@@ -61,7 +61,7 @@ public class ServerConnessioneTCP {
 
 		stream = new DataInputStream(connection.getInputStream());
 		System.out.println(stream.readUTF());
-				//stream.close();
+		//stream.close();
 
 		dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
@@ -75,6 +75,8 @@ public class ServerConnessioneTCP {
 	public void chiudi() throws IOException {
 		try {
 			if (sSocket != null) {
+				stream.close();
+				out.close();
 				sSocket.close();
 			}
 		} catch (IOException ex) {
